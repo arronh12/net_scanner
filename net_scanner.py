@@ -9,10 +9,12 @@ def scan(ip):
     arp_request = scapy.ARP(pdst=ip)
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_req_bcast = broadcast/arp_request
-    answered, unanswered = scapy.srp(arp_req_bcast, timeout=2)
-    print(answered.summary())
-    print("\n")
-    print(unanswered.summary())
+    answered = scapy.srp(arp_req_bcast, timeout=2)[0]
+
+    for e in answered:
+        print(e[1].psrc)
+        print(e[1].hwsrc)
+        print("-----------------------------------------------------------------------------------------------------------------------------------------------")
 
 
 # function calls
