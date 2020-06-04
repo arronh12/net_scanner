@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 
 import scapy.all as scapy
+import optparse
+
+# function to use optparse library to take user input from terminal for ip range.
+def get_arguments():
+    prs = optparse.OptionParser()
+    prs.add_option("-t", "--target", dest="target", help="Input IP range for scan")
+    (options, arguments) = prs.parse_args()
+
+    if not options.target:
+        prs.error("[*]Error. Please specify an IP range, Use --help for more info.")
+    return options
 
 
 # function to take in an ip address and use it with broadcast MAC address to send out an ARP request to determine MAC of
@@ -29,6 +40,7 @@ def print_result(results_list):
 
 
 # function calls
-scan_result = scan("10.0.2.1/24")
+options = get_arguments()
+scan_result = scan(options.target)
 print_result(scan_result)
 
