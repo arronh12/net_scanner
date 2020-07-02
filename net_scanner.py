@@ -3,6 +3,7 @@
 import scapy.all as scapy
 import optparse
 
+
 # function to use optparse library to take user input from terminal for ip range.
 def get_arguments():
     prs = optparse.OptionParser()
